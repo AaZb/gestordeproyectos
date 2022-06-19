@@ -1,0 +1,43 @@
+<h3>
+  Mi Gestor de Proyectos<br>
+  <small class="text-muted">Andrés Zúñiga Bustos</small>
+</h3>
+
+
+<%= render 'form', manager: @manager %>
+
+<br>
+<%= search_form_for @q do |f| %>
+  <%= f.label :state_eq, "Estado" %>
+  <%= f.select :state_eq, options_for_select(Manager.states, @q.state_eq), {}, {class: "form-control"} %><br>
+  <%= f.submit "Buscar", class: "btn btn-primary" %>
+<% end %>
+
+
+<div class="row">
+<table class="table table-bordered border-primary table-striped table-hover">
+        <tr>
+            <th>Nombre del Proyecto</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Fecha de Inicio</th>
+            <th>Fecha de Término</th>  
+            <th></th> 
+        </tr>
+        <% @managers.each do |manager| %>
+        <tr>
+            <td><%= manager.project %></td>
+            <td><%= manager.description %></td>
+            <td><%= manager.state %></td>
+            <td><%= manager.start_date %></td>
+            <td><%= manager.end_date %></td>
+            <td><%= link_to "Editar", edit_manager_path(manager) %></td>
+            
+
+            
+
+            
+        </tr>
+        <% end %>
+    <table>
+</div>
